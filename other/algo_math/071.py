@@ -13,9 +13,11 @@ for i in range(n):
         xy.append ([x, y])
 ans = 0
 for x, y in xy:
+    ok = True
     for i in range(n):
         if a[i] * x + b[i] * y > c[i]:
+            ok = False
             break
-    else:       
+    if ok:       
         ans = max(ans, x + y)
 print(ans)
