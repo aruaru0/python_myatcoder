@@ -1,3 +1,4 @@
+# --- セグメント木 -----
 class segtree():
     n=1
     size=1
@@ -93,35 +94,41 @@ class segtree():
         return str([self.get(i) for i in range(self.n)])
     
 
+# ----- ここからメインプログラム　--------
 N, Q = map(int, input().split())
 
+# 文字列Sと逆順のTを作成。同時に整数値に変換
 s = [ord(c) for c in list(input())]
 t = s[::-1]
 
+# 素数
 p = 998244353
 
-
+# xをランダムに生成
 import random
 x = random.randint(10000, p) % p
+
+# セグメント木にのせるデータに変換
 s = [[e, x, p] for e in s]
 t = [[e, x, p] for e in t]
 
+# funcの定義
 def op(x, y) :
     h0, x0, p = x
     h1, x1, p = y
-    # print(x, y, "--", [(s0 + s1 * x0)%p, (x0*x1)%p, p])
     return [(h0 + h1 * x0)%p, (x0*x1)%p, p]
 
+# セグメント木の生成
 segS = segtree(s, op, [0,1,p])
 segT = segtree(t, op, [0,1,p])
 
+# ループ
 for _ in range(Q) :
     v = input().split()
     if v[0] == '1' :
         pos, c = int(v[1])-1, ord(v[2])
         segS.set(pos, [c, x, p])
         segT.set(N-1-pos, [c, x, p])
-        # print(x, c)
     else :
         l, r = int(v[1])-1, int(v[2])
         h0 = segS.prod(l, r)[0]
