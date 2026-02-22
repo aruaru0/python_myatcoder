@@ -1,10 +1,3 @@
 n, m = map(int, input().split())
-ans = 0
-for _ in range(n):
-    a, b = map(int, input().split())
-    if a < m:
-        diff = m - a
-        need = (diff + b - 1) // b
-        if need > ans:
-            ans = need
-print(ans)
+x = [(m-a+b-1)//b if a < m else 0 for a, b in [[x for x in list(map(int, input().split()))] for _ in range(n)]]
+print(max(x))
