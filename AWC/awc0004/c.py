@@ -1,0 +1,5 @@
+N = int(input())
+H = list(map(int, input().split()))
+H.sort()
+ans = abs(H[0]) + H[-1] - H[0] + abs(H[-1])
+print(ans)
