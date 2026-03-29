@@ -9,6 +9,6 @@ for i in range(n):
     nxt[b-1] += 1
 
 
-c  = [cur[i]-nxt[i] for i in range(m)]
+c  = [nxt[i]-cur[i] for i in range(m)]
 
 print(*c, sep="\n")
